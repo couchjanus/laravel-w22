@@ -7,6 +7,12 @@
         <title>Document</title>
     </head>
     <body>
+    <ul>
+    <li><a href="{{ route('home') }}">Home</a></li>
+    <li><a href="{{ route('about') }}">About</a></li>
+    <li><a href="{{ route('hello') }}">Contact</a></li>
+</ul>
+
         <h2>Hello {{ $name }}</h2>
         <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam incidunt quo suscipit rem dolor a obcaecati, reprehenderit cupiditate placeat sapiente adipisci similique velit ab eaque minima distinctio mollitia voluptates!</div>
 

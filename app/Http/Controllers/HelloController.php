@@ -7,6 +7,7 @@ class HelloController
     public function index()
     {
         $name = 'Controller';
+        
         return view('hello', compact('name'));
     }
 }
