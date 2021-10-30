@@ -2,8 +2,8 @@
 <a href="/admin/categories"><button>Go To list</button></a>
 
 <form method='POST' action="/admin/categories/{{$category->id}}">
-    <input type="hidden" name='_token' value="{{csrf_token()}}">
-    <input type="hidden" name='_method' value="PUT">
+    @csrf
+    @method("PUT")
     <p>
         <lable>
         Name:
@@ -14,7 +14,7 @@
         <lable>
             Status: 
         </lable>
-        <input type="checkbox" name="status" <?php echo ($category->status==1)?'checked':''?>>
+        <input type="checkbox" name="status" @if($category->status==1) 'checked' @endif>
     </p>
     <p><input type="submit" value="Update Category"></p>
 </form>

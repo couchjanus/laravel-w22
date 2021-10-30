@@ -9,7 +9,7 @@
         <th>Action</th>
     </tr>
     <tbody>
-        <?php foreach ($categories as $category):?>
+        @forelse ($categories as $category)
         <tr>
             <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
@@ -23,8 +23,9 @@
             </form>
         </td>
         </tr>
-
-        <?php endforeach;?>
+        @empty
+            <h2>No categories yet</h2>
+        @endforelse
     </tbody>
 
 

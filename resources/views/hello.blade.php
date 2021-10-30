@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-    <ul>
-    <li><a href="{{ route('home') }}">Home</a></li>
-    <li><a href="{{ route('about') }}">About</a></li>
-    <li><a href="{{ route('hello') }}">Contact</a></li>
-</ul>
+<x-app-component>
 
-        <h2>Hello {{ $name }}</h2>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi numquam incidunt quo suscipit rem dolor a obcaecati, reprehenderit cupiditate placeat sapiente adipisci similique velit ab eaque minima distinctio mollitia voluptates!</div>
+<x-slot name="header">
+    <h2 class="text-xl text-gray-800 leading-tight font-semibold">
+        Home Page
+    </h2>
+</x-slot>
 
-        <p>Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</p>
-        <h3>{{ date('Y') }}</h3>
-        {{ time() }}
-    </body>
-    </html>
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="p-6 bg-white border-b border-gray-200">
+        Hello There!
+        </div>
+    </div>
+</div>
+
+</x-app-component>
