@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -14,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = \DB::table('categories')->get();
-        // dump($categories);
+        $categories = Category::all();
+        // dd($categories);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -37,12 +38,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $status = $request['status']?1:0;
-        \DB::table('categories')->insert([
-            'name' => $request['name'],
-            'status' => $status,
-            'created_at' => now(),
-            'updated_at' => now()
+        Category::create([
+            'name' => $request->name,
+            'status' => $request->status?1:0
         ]);
        
         return redirect(route('admin.categories.index'));
@@ -51,10 +49,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
     }
@@ -62,12 +60,11 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = \DB::table('categories')->where('id', $id)->first();
         return view('admin.categories.edit', compact('category'));
     }
 
@@ -75,18 +72,14 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $status = $request['status']?1:0;
-        \DB::table('categories')->update([
-     
-            'name' => $request['name'],
-            'status' => $status,
-            
-            'updated_at' => now()
+        $category->update([
+            'name' => $request->name,
+            'status' => $request->status?1:0
         ]);
        
         return redirect(route('admin.categories.index'));
@@ -95,12 +88,30 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        \DB::delete('delete from categories where id=?', [$id]);
+        $category->delete();
         return redirect(route('admin.categories.index'));
     }
+
+    public function trashed()
+    {
+        $categories = Category::onlyTrashed()->get();
+        return view('admin.categories.trashed', compact('categories'));
+    }
+    public function restore($id)
+    {
+        Category::withTrashed()->where('id', $id)->first()->restore();
+        return redirect(route('admin.categories.trashed'));
+    }
+
+    public function force($id)
+    {
+        Category::withTrashed()->where('id', $id)->first()->forceDelete();
+        return redirect(route('admin.categories.trashed'));
+    }
+
 }

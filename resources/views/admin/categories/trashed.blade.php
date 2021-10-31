@@ -1,6 +1,6 @@
 <x-admin-layout>
 @section('title')
-    Categories List
+    Trashed Categories List
 @endsection
 
 <x-slot name="header">
@@ -10,7 +10,7 @@
             <div>
               <!-- Card stats -->
               <div class="flex flex-wrap">
-                <p class="text-white text-xl font-bold uppercase px-3 py-1 mr-1 mb-1">Categories List</p>
+                <p class="text-white text-xl font-bold uppercase px-3 py-1 mr-1 mb-1">Trashed Categories List</p>
               </div>
             </div>
           </div>
@@ -23,16 +23,16 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-blueGray-700">
-                        Categories
+                        Trashed Categories
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                      <a href="{{route('admin.categories.create')}}"><button
+                      <a href="{{route('admin.categories.index')}}"><button
                         class="bg-green-500 text-white active:bg-green-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                         style="transition:all .15s ease"
                       >
-                        Add New
+                        Go Back
                       </button></a>
                     </div>
                   </div>
@@ -49,7 +49,7 @@
                           Category name
                         </th>
                         <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                          Status
+                          Trashed
                         </th>
                         <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                           Action
@@ -66,37 +66,42 @@
                         {{$category->name}}
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        {{$category->status}}
+                        {{$category->deleted_at}}
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                        <a href="{{route('admin.categories.edit', $category->id)}}">
+
+                        
+                        <form method="POST" action="{{ route('admin.categories.restore', $category->id)}}" style="display:inline;"> 
+                        @csrf
+                        
                             <button
                         class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
+                        type="submit"
                         style="transition:all .15s ease"
                       >
-                        Edit
+                        Restore
                       </button>
-                    </a>
+                      </form>
 
 
-                <form method="POST" action="{{ route('admin.categories.update', $category)}}" style="display:inline;"> 
+                <form method="POST" action="{{ route('admin.categories.force', $category->id)}}" style="display:inline;"> 
                 @csrf
                 @method("DELETE")
-                <button
+                        <button
                         class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                         type="submit"
                         style="transition:all .15s ease"
                       >
-                        Delete
-                      </button>
+                        Destroy
+                        </button>
+                    </form>
             
                         </td>
                       </tr>
                       @empty
                       <tr>
                       <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl whitespace-nowrap p-4">
-                         No Categories yet
+                         No Trashed Categories yet
                         </td>
                       </tr>
                       @endforelse
@@ -123,14 +128,13 @@
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           <div class="flex items-center">
-                          <a href="{{ route('admin.categories.trashed') }}">  
-                          <button
+                            <button
                             class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                             type="button"
                             style="transition:all .15s ease"
                             >
                                 See all
-                            </button></a>
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -143,7 +147,6 @@
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                           <div class="flex items-center">
-                          <a href="{{ route('admin.categories.trashed') }}">  
                           <button
                             class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                             type="button"
@@ -151,7 +154,6 @@
                             >
                                 See all
                             </button>
-                            </a>
                           </div>
                         </td>
                       </tr>

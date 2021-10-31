@@ -25,7 +25,10 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
     // Route::get('users', 'UserController@index')->name('users');
     Route::get('users/blocked', 'UserController@blocked')->name('users.blocked');
     Route::resource('users', 'UserController');
-    // 
+    // trashed
+    Route::get('categories/trashed', 'CategoryController@trashed')->name('categories.trashed');
+    Route::post('categories/restore/{id}', 'CategoryController@restore')->name('categories.restore');
+    Route::delete('categories/force/{id}', 'CategoryController@force')->name('categories.force');
     Route::resource('categories', 'CategoryController');
 });
 
