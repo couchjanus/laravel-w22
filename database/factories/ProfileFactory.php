@@ -22,7 +22,13 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'phone' => $this->faker->lastName(),
+            'location' => $this->faker->streetAddress(),
+            'note' => $this->faker->text($maxNbChars = 200)
+ 
         ];
     }
 }
