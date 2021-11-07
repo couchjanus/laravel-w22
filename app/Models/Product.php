@@ -22,10 +22,15 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function pictures()
+    {
+        return $this->belongsToMany(Picture::class);
+    }
+
     public static function search($search){
         return empty($search) ? static::query()
         : static::where('id', 'like', '%'.$search.'%')
-            ->orWhere('name', 'like', '%'.$search.'%')
-            ->orWhere('price', 'like', '%'.$search.'%');
+        ->orWhere('name', 'like', '%'.$search.'%')
+        ->orWhere('price', 'like', '%'.$search.'%');
     }
 }

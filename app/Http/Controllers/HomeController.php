@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use View;
-
+use App\Models\{Product};
 class HomeController extends Controller
 {
     public function index()
     {
         $title = 'Home Page';
-        // return View::make('home.index', ['title'=>'Home Page']);
-        // return view('home.index', ['title'=>'Home Page']);
-        // return view('home.index', compact('title'));
-        // return view('home.index')->with('title', 'Home Page');
+        $products = Product::all();
+        // return response()->json(['products'=>$products]);
         return view('home.index')->withTitle('Home Page');
+    }
+
+    public function products()
+    {
+        $products = Product::all();
+        return response()->json(['products'=>$products]);
     }
 }

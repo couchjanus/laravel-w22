@@ -12,10 +12,10 @@ class ProductsTable extends Component
     use WithPagination;
 
     public $search = '';
+    public $perPage = 10;
     public $sortField = 'id';
     public $sortAsc = true;
     public $selected = [];
-    public $perPage = 10;
 
     public function deleteProducts(){
         Product::destroy($this->selected);
@@ -23,12 +23,15 @@ class ProductsTable extends Component
 
     public function render()
     {
-        return view('livewire.admin.products-table', 
-        [
-            'products'=>Product::search($this->search)
+
+      
+        return view('livewire.admin.products-table', [
+            'products' => Product::search($this->search)
             ->orderBy($this->sortField, $this->sortAsc ? 'asc':'desc')
-            ->with('brand')
-            ->paginate($this->perPage)
+            ->with('brand')->with('category')
+            ->paginate($this->perPage),
         ]);
     }
+
+  
 }

@@ -22,11 +22,11 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-            'status' => $this->faker->boolean,
+            'name' => $this->faker->unique()->word(),
+            'status' => $this->faker->boolean(),
             'created_at'=> $this->faker->dateTimeBetween($startData='-3 years', $endData='now', $timezone= 'Europe/Kiev'),
             'updated_at'=> $this->faker->dateTimeBetween($startData='-2 years', $endData='now', $timezone= 'Europe/Kiev'),
-            'deleted_at'=> $this->faker->dateTimeBetween($startData='-1 years', $endData='now', $timezone= 'Europe/Kiev'),
+            // 'deleted_at'=> $this->faker->dateTimeBetween($startData='-1 years', $endData='now', $timezone= 'Europe/Kiev'),
         ];
     }
 }
