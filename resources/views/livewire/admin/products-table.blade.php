@@ -22,7 +22,13 @@
         </div>
 
         <div class="w-1/6 mx-1 relative">
-            <button wire:click="deleteProducts" class="block w-full bg-red-200 border border-gray-200 text-white py-3 px-4 pr-8 rounded">
+            <a href="{{route('admin.products.create')}}"><button class="block w-full bg-indigo-500 border border-gray-200 text-white py-3 px-4 pr-8 rounded">
+                Add new
+            </button></a>
+        </div>
+
+        <div class="w-1/6 mx-1 relative">
+            <button wire:click="deleteProducts" class="block w-full bg-red-500 border border-gray-200 text-white py-3 px-4 pr-8 rounded">
                 Delete
             </button>
         </div>

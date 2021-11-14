@@ -15,9 +15,18 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |
 */
 
-Route::get('/', function(){
-    return view('welcome');
-})->name('welcome');
+// Route::get('/', function(){
+//     return view('welcome');
+// })->name('welcome');
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+
+Route::get('/cart', 'App\Http\Controllers\CartController@index')->name('cart.index');
+
+Route::get('/cart/item/{id}/remove', 'App\Http\Controllers\CartController@destroy')->name('cart.item.remove');
+
+Route::post('/product/add/add/cart', 'App\Http\Controllers\HomeController@addToCart')->name('product.add.to.cart');
+
+Route::get('/checkout', 'App\Http\Controllers\CheckoutController@index')->name('checkout.index');
 
 Route::get('/api/products', 'App\Http\Controllers\HomeController@products');
 Route::get('/about', 'App\Http\Controllers\AboutController')->name('about');
