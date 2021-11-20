@@ -148,6 +148,34 @@
               <li class="items-center">
                 <a
                   class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  href="{{route('admin.brands.index')}}"
+                  ><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
+                  Brands</a
+                >
+              </li>
+              @can('product-list')
+              <li class="items-center">
+                <a
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  href="{{route('admin.products.index')}}"
+                  ><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
+                  Products</a
+                >
+              </li>
+              @endcan
+              @can('role-list')
+              <li class="items-center">
+                <a
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  href="{{route('admin.roles.index')}}"
+                  ><i class="fas fa-file text-blueGray-400 mr-2 text-sm"></i>
+                  Roles</a
+                >
+              </li>
+              @endcan
+              <li class="items-center">
+                <a
+                  class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   href="#/profile"
                   ><i class="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>
                   Profile Page</a

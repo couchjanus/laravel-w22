@@ -32,7 +32,7 @@ Route::get('/api/products', 'App\Http\Controllers\HomeController@products');
 Route::get('/about', 'App\Http\Controllers\AboutController')->name('about');
 
 
-Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
+Route::middleware('auth')->namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/', 'DashboardController')->name('dashboard');
     // Route::get('users', 'UserController@index')->name('users');
     Route::get('users/blocked', 'UserController@blocked')->name('users.blocked');
@@ -44,6 +44,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')-
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
     Route::resource('brands', 'BrandController');
+    Route::resource('roles', 'RoleController');
 });
 
 
